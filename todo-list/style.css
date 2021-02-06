@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f06292;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: #3c424a;
+  border-radius: 5px;
+  width: 600px;
+  min-height: 700px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+}
+
+.date-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date-container button {
+  height: 5rem;
+  width: 5rem;
+  font-family: inherit;
+  font-size: 3rem;
+  font-weight: 200;
+  color: #6e7777;
+  background: transparent;
+  border: none;
+}
+
+.date-container button:focus {
+  outline-style: none;
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 3rem;
+  padding: 2rem;
+}
+
+.date h2 {
+  color: #dee4e9;
+  font-weight: 500;
+}
+
+.date h3 {
+  color: #6e7777;
+  font-weight: 400;
+  font-size: large;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+form input[type="text"] {
+  background: #343a40;
+  border: 1px solid #2c3035;
+  border-radius: 3px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1.25rem;
+  height: 3rem;
+  width: 80%;
+}
+
+form input:focus {
+  outline-style: none;
+}
+
+.task-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tasks {
+  /* border-bottom: 1px solid #2c3035; */
+  width: 80%;
+  list-style: none;
+  padding: 1rem 0;
+  text-align: left;
+  font-size: 1rem;
+}
+
+li {
+  color: rgb(236, 233, 233);
+  padding: 0.25rem 0;
+  margin: 1rem auto;
+  cursor: default;
+  display: flex;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.complete {
+  text-decoration: line-through;
+  color: rgb(155, 154, 154);
+}
+
+/* li input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1rem;
+
+  background-color: #3f454d;
+  color: #3f454d;
+  border: 1px solid #2c3035;
+  border-radius: 3px;
+} */

@@ -1,0 +1,35 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+
+    <script src="https://kit.fontawesome.com/462ae7e8a8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div id="container" class="container">
+        <div class="date-container">
+            <button class="left-btn"><</button>
+            <div id="date" class="date"></div>
+            <button class="right-btn">></button>
+        </div>
+        <div class="task-container">
+            <form id="form" class="form">
+                <input 
+                    id="input" 
+                    type="text" 
+                    placeholder="Add a task..." 
+                    autocomplete="off" 
+                />
+            </form>
+            <ul id="tasks" class="tasks">
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
