@@ -4,9 +4,10 @@ const inputEl = document.getElementById('input');
 const tasksEl = document.getElementById('tasks');
 
 
+
 // Remove todo
-function deleteTask(todo) {
-    todo.remove();
+function deleteTask(todoEl) {
+    todoEl.remove();
 }
 
 // Submit new todo
@@ -22,8 +23,33 @@ formEl.addEventListener('submit', (e) => {
 // Add new todo
 function addTask() {
     const todoEl = document.createElement('li');
-    todoEl.innerHTML = `<p>${ inputEl.value }</p><i class="fas fa-ellipsis-h"></i>`;
+    const textEl = document.createElement('p');
+    const menuBtn = document.createElement('button');
+    const menuEl = document.createElement('div');
+    const pinBtn = document.createElement('button');
+    const addMemoBtn = document.createElement('button');
+    const menuArrow = document.createElement('div');
+
     tasksEl.appendChild(todoEl);
+    todoEl.appendChild(textEl);
+    todoEl.appendChild(menuBtn);
+    todoEl.appendChild(menuEl);
+    menuEl.appendChild(pinBtn);
+    menuEl.appendChild(addMemoBtn);
+    menuEl.appendChild(menuArrow);
+
+    menuBtn.classList.add('menu-btn');
+    menuEl.classList.add('menu', 'hide');
+    pinBtn.classList.add('pin-btn');
+    addMemoBtn.classList.add('add-memo-btn');
+    menuArrow.classList.add('menu-arrow');
+
+    textEl.innerText = inputEl.value;
+    menuBtn.innerHTML = `<i class="fas fa-ellipsis-h"></i>`;
+    pinBtn.innerHTML = `<i class="fas fa-thumbtack"></i>Pin on the top`;
+    addMemoBtn.innerHTML = `<i class="fas fa-sticky-note"></i>Add a memo`;
+
+
 
     // Trying to let the checkbox connect with toggle
     /* const checkboxEl = document.createElement('input');
@@ -31,22 +57,41 @@ function addTask() {
     todoEl.appendChild(checkboxEl);
     todoEl.innerHTML += `<label>${ inputEl.value }</label>`; */
     
+
+
     // Initial the input value
     inputEl.value = '';
 
     // Left click to complete todo
-    todoEl.addEventListener('click', () => {
-        todoEl.classList.toggle('complete');
+    textEl.addEventListener('click', () => {
+        textEl.classList.toggle('complete');
+
+
 
         // Trying to let the checkbox connect with toggle
         /* checkboxEl.checked = !checkboxEl.checked; */
     });
 
     // Right click to remove todo
-    todoEl.addEventListener('contextmenu', (e) => {
+    textEl.addEventListener('contextmenu', (e) => {
         e.preventDefault();
 
         deleteTask(todoEl);
+    });
+
+    // Show menu
+    menuBtn.addEventListener('click', () => {
+        menuEl.classList.toggle('hide');
+    });
+
+    // Pin the task on top
+    pinBtn.addEventListener('click', () => {
+        console.log('yo');
+    });
+
+    // Add a memo to task
+    addMemoBtn.addEventListener('click', () => {
+        console.log('yo');
     });
 }
 
