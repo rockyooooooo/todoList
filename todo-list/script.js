@@ -1,9 +1,33 @@
 const dateEl = document.getElementById('date');
+const taskContainerEl = document.getElementById('task-container')
 const formEl = document.getElementById('form')
+const topEl = document.getElementById('top');
 const inputEl = document.getElementById('input');
 const tasksEl = document.getElementById('tasks');
+const pinIcon = 'fas fa-thumbtack';
 
 
+
+function removeFromTop(todoEl, pinBtn, menuEl) {
+    tasksEl.appendChild(todoEl);
+    pinBtn.innerHTML = `<i class="fas fa-thumbtack"></i>Pin on the top`;
+    pinBtn.addEventListener('click', () => {
+        // menuEl.classList.toggle('hide');
+        pinOnTop(todoEl, pinBtn, menuEl);
+    });
+}
+
+function pinOnTop(todoEl, pinBtn, menuEl) {
+    topEl.appendChild(todoEl);
+    // const pin = document.createElement('i');
+    // pin.classList.add('fas', 'fa-thumbtack', 'pin');
+    // topEl.insertBefore(pin, todoEl);
+    pinBtn.innerHTML = `<i class="fas fa-thumbtack"></i>Remove from the top`;
+    pinBtn.addEventListener('click', () => {
+        // menuEl.classList.toggle('hide');
+        removeFromTop(todoEl, pinBtn, menuEl);
+    });
+}
 
 // Remove todo
 function deleteTask(todoEl) {
@@ -86,7 +110,8 @@ function addTask() {
 
     // Pin the task on top
     pinBtn.addEventListener('click', () => {
-        console.log('yo');
+        menuEl.classList.toggle('hide');
+        pinOnTop(todoEl, pinBtn, menuEl);
     });
 
     // Add a memo to task
