@@ -4,27 +4,28 @@ const formEl = document.getElementById('form')
 const topEl = document.getElementById('top');
 const inputEl = document.getElementById('input');
 const tasksEl = document.getElementById('tasks');
-const pinIcon = 'fas fa-thumbtack';
+const LStodos = JSON.parse(localStorage.getItem('todos'));
 
 
+
+if(LStodos){
+    LStodos.forEach(todo => {
+        addTask(todo);
+    })
+}
 
 function removeFromTop(todoEl, pinBtn, menuEl) {
     tasksEl.appendChild(todoEl);
     pinBtn.innerHTML = `<i class="fas fa-thumbtack"></i>Pin on the top`;
     pinBtn.addEventListener('click', () => {
-        // menuEl.classList.toggle('hide');
         pinOnTop(todoEl, pinBtn, menuEl);
     });
 }
 
 function pinOnTop(todoEl, pinBtn, menuEl) {
     topEl.appendChild(todoEl);
-    // const pin = document.createElement('i');
-    // pin.classList.add('fas', 'fa-thumbtack', 'pin');
-    // topEl.insertBefore(pin, todoEl);
     pinBtn.innerHTML = `<i class="fas fa-thumbtack"></i>Remove from the top`;
     pinBtn.addEventListener('click', () => {
-        // menuEl.classList.toggle('hide');
         removeFromTop(todoEl, pinBtn, menuEl);
     });
 }
@@ -45,7 +46,8 @@ formEl.addEventListener('submit', (e) => {
 
 
 // Add new todo
-function addTask() {
+function addTask(LStodos) {
+
     const todoEl = document.createElement('li');
     const textEl = document.createElement('p');
     const menuBtn = document.createElement('button');
@@ -68,7 +70,15 @@ function addTask() {
     addMemoBtn.classList.add('add-memo-btn');
     menuArrow.classList.add('menu-arrow');
 
-    textEl.innerText = inputEl.value;
+    if(LStodos){
+        textEl.innerText = LStodos.text;
+        if(LStodos.completed){
+            textEl.classList.add('completed');
+        }
+    } else {
+        textEl.innerText = inputEl.value;
+    }
+    
     menuBtn.innerHTML = `<i class="fas fa-ellipsis-h"></i>`;
     pinBtn.innerHTML = `<i class="fas fa-thumbtack"></i>Pin on the top`;
     addMemoBtn.innerHTML = `<i class="fas fa-sticky-note"></i>Add a memo`;
@@ -88,8 +98,9 @@ function addTask() {
 
     // Left click to complete todo
     textEl.addEventListener('click', () => {
-        textEl.classList.toggle('complete');
+        textEl.classList.toggle('completed');
 
+        updateLS();
 
 
         // Trying to let the checkbox connect with toggle
@@ -101,6 +112,8 @@ function addTask() {
         e.preventDefault();
 
         deleteTask(todoEl);
+
+        updateLS();
     });
 
     // Show menu
@@ -112,16 +125,32 @@ function addTask() {
     pinBtn.addEventListener('click', () => {
         menuEl.classList.toggle('hide');
         pinOnTop(todoEl, pinBtn, menuEl);
+        
     });
 
     // Add a memo to task
     addMemoBtn.addEventListener('click', () => {
         console.log('yo');
     });
+
+    updateLS();
 }
 
 
-
+function updateLS() {
+    const todosEl = document.querySelectorAll('li');
+    const todos = [];
+    
+    todosEl.forEach( todoEl => {
+        const pEl = todoEl.firstChild;
+        todos.push({
+            text: todoEl.innerText,
+            completed: pEl.classList.contains('completed')
+        });
+    });
+    
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
 
 
 

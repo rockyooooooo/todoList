@@ -198,7 +198,7 @@ li button:focus {
   margin: 0rem 0.5rem;
 }
 
-.complete {
+.completed {
   text-decoration: line-through;
   color: rgb(155, 154, 154);
 }
