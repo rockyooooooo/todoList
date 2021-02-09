@@ -8,10 +8,22 @@ const LStodos = JSON.parse(localStorage.getItem('todos'));
 
 
 
-if(LStodos){
-    LStodos.forEach(todo => {
-        addTask(todo);
-    })
+// if(LStodos){
+//     LStodos.forEach(todo => {
+//         addTask(todo);
+//     })
+// }
+
+function addMemo(memoEl, memoInput, memoText) {
+    memoEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        memoText.innerText = memoInput.value;
+        memoInput.classList.add('hide');
+        memoText.classList.remove('hide');
+
+        // updateLS();
+    });
 }
 
 function removeFromTop(todoEl, pinBtn, menuEl) {
@@ -55,20 +67,31 @@ function addTask(LStodos) {
     const pinBtn = document.createElement('button');
     const addMemoBtn = document.createElement('button');
     const menuArrow = document.createElement('div');
+    const memoEl = document.createElement('form');
+    const memoInput = document.createElement('input');
+    const memoText = document.createElement('p');
+
+    memoEl.type = 'text';
 
     tasksEl.appendChild(todoEl);
-    todoEl.appendChild(textEl);
-    todoEl.appendChild(menuBtn);
-    todoEl.appendChild(menuEl);
-    menuEl.appendChild(pinBtn);
-    menuEl.appendChild(addMemoBtn);
-    menuEl.appendChild(menuArrow);
+        todoEl.appendChild(textEl);
+        todoEl.appendChild(menuBtn);
+        todoEl.appendChild(menuEl);
+            menuEl.appendChild(pinBtn);
+            menuEl.appendChild(addMemoBtn);
+            menuEl.appendChild(menuArrow);
+        todoEl.appendChild(memoEl);
+            memoEl.appendChild(memoInput);
+            memoEl.appendChild(memoText);
 
     menuBtn.classList.add('menu-btn');
     menuEl.classList.add('menu', 'hide');
     pinBtn.classList.add('pin-btn');
     addMemoBtn.classList.add('add-memo-btn');
     menuArrow.classList.add('menu-arrow');
+    memoEl.classList.add('memo');
+    memoInput.classList.add('memo-input', 'hide');
+    memoText.classList.add('memo-txt', 'hide');
 
     if(LStodos){
         textEl.innerText = LStodos.text;
@@ -130,7 +153,11 @@ function addTask(LStodos) {
 
     // Add a memo to task
     addMemoBtn.addEventListener('click', () => {
-        console.log('yo');
+        menuEl.classList.toggle('hide');
+        memoEl.classList.remove('hide');
+        memoInput.classList.remove('hide');
+        memoText.classList.add('hide');
+        addMemo(memoEl, memoInput, memoText);
     });
 
     updateLS();
@@ -139,7 +166,9 @@ function addTask(LStodos) {
 
 function updateLS() {
     const todosEl = document.querySelectorAll('li');
+    const memosEl = document.querySelectorAll('.memo-txt');
     const todos = [];
+    const memos = [];
     
     todosEl.forEach( todoEl => {
         const pEl = todoEl.firstChild;
@@ -148,8 +177,15 @@ function updateLS() {
             completed: pEl.classList.contains('completed')
         });
     });
+
+    // memosEl.forEach( memoEl => {
+    //     memos.push({
+    //         text: memoEl.innerText
+    //     });
+    // });
     
     localStorage.setItem('todos', JSON.stringify(todos));
+    // localStorage.setItem('memos', JSON.stringify(memos));
 }
 
 

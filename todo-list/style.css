@@ -99,7 +99,7 @@ form input:focus {
   border-bottom: 1px solid #2c3035;
   /* list-style-image: url("pin.png"); */
   list-style: none;
-  font-size: 1rem;
+  font-size: 1.25rem;
   position: relative;
 }
 
@@ -121,7 +121,7 @@ form input:focus {
 .tasks {
   width: 80%;
   list-style-type: none;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 li {
@@ -201,6 +201,21 @@ li button:focus {
 .completed {
   text-decoration: line-through;
   color: rgb(155, 154, 154);
+}
+
+.memo-input {
+  background: #343a40;
+  border: 1px solid #2c3035;
+  border-radius: 3px;
+  padding: 0.25rem;
+  color: inherit;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.memo-txt {
+  color: #94aaaa;
+  font-size: 1rem;
 }
 
 /* li input[type="checkbox"] {
